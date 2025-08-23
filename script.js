@@ -11,9 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextQuestionBtn = document.getElementById('next-q-btn');
     const questionCounterElement = document.getElementById('question-counter');
     const soloScoreElement = document.getElementById('solo-score');
-
+    
     // GENEL DEĞİŞKENLER VE API AYARLARI
-    // Bu bölüm, Vercel Vekil Sunucu (Proxy) modeline göre düzenlenmiştir.
     let allQuizzes = [];
     let currentQuizData = {};
     let currentQuestionIndex = 0;
@@ -24,8 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`/api/getQuizzes`);
             if (!response.ok) {
-                const errData = await response.json();
-                throw new Error(errData.error || 'Sınav listesi alınamadı.');
+                // GÜNCELLEME: Hata cevabının JSON olup olmadığını kontrol et
+                const errorText = await response.text();
+                throw new Error(errorText || 'Sınav listesi alınamadı.');
             }
             allQuizzes = await response.json();
             renderQuizList(allQuizzes);
@@ -61,8 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`/api/getQuiz?id=${quizId}`);
             if (!response.ok) {
-                const errData = await response.json();
-                throw new Error(errData.error || 'Sınav verileri alınamadı.');
+                // GÜNCELLEME: Hata cevabının JSON olup olmadığını kontrol et
+                const errorText = await response.text();
+                throw new Error(errorText || 'Sınav verileri alınamadı.');
             }
             currentQuizData = await response.json();
             if (!currentQuizData.sorular || currentQuizData.sorular.length === 0) { throw new Error('Bu sınavda soru bulunamadı.'); }
