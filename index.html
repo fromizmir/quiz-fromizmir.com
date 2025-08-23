@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes | From İzmir</title> <link rel="icon" type="image/png" href="https://lolonolo.com/wp-content/uploads/2025/04/lolonolo-favicon.png">
+    <link rel="apple-touch-icon" href="https://lolonolo.com/wp-content/uploads/2025/04/lolonolo-favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="lobby-screen" class="screen">
+        <div class="lobby-container">
+            <h1>Choose Your Quiz and Start!</h1>
+            <p>Select a quiz from the list below or use the search.</p>
+            <div class="quiz-selection-area">
+                <input type="text" id="quiz-search-input" placeholder="Search quizzes...">
+                <div id="quiz-list-container">
+                    <p>Loading quizzes...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="competition-container" id="competition-screen" style="display: none;">
+        <div class="quiz-panel">
+            <div class="quiz-header">
+                <h1 class="quiz-title" id="quiz-title">...</h1>
+                <div class="solo-score-display" id="solo-score-container">
+                    Score: <span id="solo-score">0</span>
+                </div>
+            </div>
+            <div class="question-area">
+                <h3 id="question-text">...</h3>
+                <div class="options-grid" id="options-container"></div>
+                <div class="explanation-area" id="explanation-area"></div>
+                <button class="next-question-btn" id="next-q-btn">Next Question</button>
+            </div>
+            <div class="quiz-footer" id="question-counter">Question ... / ...</div>
+        </div>
+    </div>
+
+    <div id="mobile-ad-container">
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
