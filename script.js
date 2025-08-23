@@ -2,53 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ELEMENT TANIMLAMALARI
     const lobbyScreen = document.getElementById('lobby-screen');
     const competitionScreen = document.getElementById('competition-screen');
-    // ...diğer elementler...
-    const quizListContainer = document.getElementById('quiz-list-container');
-    const searchInput = document.getElementById('quiz-search-input');
-    
-    // GENEL DEĞİŞKENLER
-    let allQuizzes = [];
-    let currentQuizData = {};
-    // ...diğer değişkenler...
-
-    // ANA FONKSİYONLAR
-    async function fetchAndDisplayQuizzes() {
-        try {
-            // İSTEK ARTIK GÜVENLİ VERcel API'MIZA GİDİYOR (ANAHTAR YOK)
-            const response = await fetch(`/api/getQuizzes`); 
-            if (!response.ok) throw new Error('Sınav listesi Vercel API üzerinden alınamadı.');
-            
-            allQuizzes = await response.json();
-            renderQuizList(allQuizzes);
-        } catch (error) {
-            if (quizListContainer) quizListContainer.innerHTML = `<p style="color: red;">Hata: ${error.message}</p>`;
-        }
-    }
-
-    async function startQuiz(quizId) {
-        lobbyScreen.innerHTML = `<h1>Sınav Yükleniyor...</h1>`;
-        try {
-            // İSTEK ARTIK GÜVENLİ VERcel API'MIZA GİDİYOR (ANAHTAR YOK)
-            const response = await fetch(`/api/getQuiz?id=${quizId}`);
-            if (!response.ok) throw new Error('Sınav verileri Vercel API üzerinden alınamadı.');
-
-            currentQuizData = await response.json();
-            // ...fonksiyonun geri kalanı aynı...
-            if(!currentQuizData.sorular || currentQuizData.sorular.length === 0){ throw new Error('Bu sınavda soru bulunamadı.'); }
-            // ...
-        } catch (error) {
-            lobbyScreen.innerHTML = `<h1 style="color: red;">Hata: ${error.message}</h1>`;
-        }
-    }
-
-    // ... Geri kalan tüm fonksiyonlar (renderQuizList, loadQuestion, handleAnswer vb.) aynı kalacak ...
-    // Tam script.js dosyasını aşağıya ekliyorum.
-});
-
-// --- TAM script.js DOSYASI ---
-document.addEventListener('DOMContentLoaded', () => {
-    const lobbyScreen = document.getElementById('lobby-screen');
-    const competitionScreen = document.getElementById('competition-screen');
     const quizListContainer = document.getElementById('quiz-list-container');
     const searchInput = document.getElementById('quiz-search-input');
     const quizTitleElement = document.getElementById('quiz-title');
@@ -58,10 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextQuestionBtn = document.getElementById('next-q-btn');
     const questionCounterElement = document.getElementById('question-counter');
     const soloScoreElement = document.getElementById('solo-score');
+
+    // GENEL DEĞİŞKENLER VE API AYARLARI
+    // Bu bölüm, Vercel Vekil Sunucu (Proxy) modeline göre düzenlenmiştir.
     let allQuizzes = [];
     let currentQuizData = {};
     let currentQuestionIndex = 0;
     let soloScore = 0;
+
+    // ANA FONKSİYONLAR
     async function fetchAndDisplayQuizzes() {
         try {
             const response = await fetch(`/api/getQuizzes`);
@@ -75,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (quizListContainer) quizListContainer.innerHTML = `<p style="color: red;">Hata: ${error.message}</p>`;
         }
     }
+
     function renderQuizList(quizzes) {
         if (!quizListContainer || !Array.isArray(quizzes)) {
             quizListContainer.innerHTML = '<p>Hiç sınav bulunamadı veya veri formatı yanlış.</p>';
@@ -90,11 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
             quizListContainer.appendChild(quizItem);
         });
     }
+
     function filterQuizzes() {
         const searchTerm = searchInput.value.toLowerCase();
         const filteredQuizzes = allQuizzes.filter(quiz => quiz.title.toLowerCase().includes(searchTerm));
         renderQuizList(filteredQuizzes);
     }
+
     async function startQuiz(quizId) {
         lobbyScreen.innerHTML = `<h1>Sınav Yükleniyor...</h1>`;
         try {
@@ -115,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lobbyScreen.innerHTML = `<h1 style="color: red;">Hata: ${error.message}</h1>`;
         }
     }
+
     function loadQuestion(questionIndex) {
         const question = currentQuizData.sorular[questionIndex];
         currentQuestionIndex = questionIndex;
@@ -132,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         questionCounterElement.textContent = `Soru ${questionIndex + 1} / ${currentQuizData.sorular.length}`;
     }
+
     function handleAnswer(selectedIndex) {
         const allButtons = optionsContainer.querySelectorAll('.option-btn');
         allButtons.forEach(btn => btn.disabled = true);
@@ -155,60 +118,19 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(showFinalScore, 3000);
         }
     }
+
     function showFinalScore() {
         questionTextElement.textContent = 'Test Bitti!';
         optionsContainer.innerHTML = `<strong>Final Puanınız: ${soloScore}</strong><br><br><button class="next-question-btn" style="display: block;" onclick="location.reload()">Yeni Sınav Seç</button>`;
         explanationArea.style.display = 'none';
         nextQuestionBtn.style.display = 'none';
     }
+
     function goToNextQuestion() { loadQuestion(currentQuestionIndex + 1); }
     function showScreen(screenToShow) { if (lobbyScreen) lobbyScreen.style.display = 'none'; if (competitionScreen) competitionScreen.style.display = 'none'; if (screenToShow) screenToShow.style.display = 'flex'; }
+    
     if (searchInput) searchInput.addEventListener('keyup', filterQuizzes);
     document.body.addEventListener('click', function (event) { if (event.target && event.target.id === 'next-q-btn') { goToNextQuestion(); } });
+    
     fetchAndDisplayQuizzes();
 });
-//ezoic ----1
-
-
-//----------
-//ezoic reklam ayarları---2
- document.addEventListener("DOMContentLoaded", function() {
-        if (typeof ezstandalone !== 'undefined') {
-            ezstandalone.cmd.push(function() {
-                ezstandalone.enable();
-                ezstandalone.display();
-            });
-        }
-
-        setTimeout(function() {
-            var fcScript = document.createElement('script');
-            fcScript.src = "https://fundingchoicesmessages.google.com/i/pub-6517205438926212?ers=1";
-            fcScript.async = true;
-            document.head.appendChild(fcScript);
-
-            function signalGooglefcPresent() {
-                if (!window.frames['googlefcPresent']) {
-                    if (document.body) {
-                        const iframe = document.createElement('iframe');
-                        iframe.name = 'googlefcPresent';
-                        iframe.style.display = 'none';
-                        document.body.appendChild(iframe);
-                    } else {
-                        setTimeout(signalGooglefcPresent, 0);
-                    }
-                }
-            }
-            signalGooglefcPresent();
-        }, 5000);
-    });
-// reklam scripti
- window.ezstandalone = window.ezstandalone || {};
-ezstandalone.cmd = ezstandalone.cmd || [];
-  //-- Google tag (gtag.js) --
-async src="https://www.googletagmanager.com/gtag/js?id=G-QKYBK4YQ1T"
-window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QKYBK4YQ1T');
-//---------
