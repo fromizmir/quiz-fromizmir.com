@@ -167,3 +167,48 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', function (event) { if (event.target && event.target.id === 'next-q-btn') { goToNextQuestion(); } });
     fetchAndDisplayQuizzes();
 });
+//ezoic ----1
+
+
+//----------
+//ezoic reklam ayarları---2
+ document.addEventListener("DOMContentLoaded", function() {
+        if (typeof ezstandalone !== 'undefined') {
+            ezstandalone.cmd.push(function() {
+                ezstandalone.enable();
+                ezstandalone.display();
+            });
+        }
+
+        setTimeout(function() {
+            var fcScript = document.createElement('script');
+            fcScript.src = "https://fundingchoicesmessages.google.com/i/pub-6517205438926212?ers=1";
+            fcScript.async = true;
+            document.head.appendChild(fcScript);
+
+            function signalGooglefcPresent() {
+                if (!window.frames['googlefcPresent']) {
+                    if (document.body) {
+                        const iframe = document.createElement('iframe');
+                        iframe.name = 'googlefcPresent';
+                        iframe.style.display = 'none';
+                        document.body.appendChild(iframe);
+                    } else {
+                        setTimeout(signalGooglefcPresent, 0);
+                    }
+                }
+            }
+            signalGooglefcPresent();
+        }, 5000);
+    });
+// reklam scripti
+ window.ezstandalone = window.ezstandalone || {};
+ezstandalone.cmd = ezstandalone.cmd || [];
+  //-- Google tag (gtag.js) --
+async src="https://www.googletagmanager.com/gtag/js?id=G-QKYBK4YQ1T"
+window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QKYBK4YQ1T');
+//---------
