@@ -11,29 +11,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextQuestionBtn = document.getElementById('next-q-btn');
     const questionCounterElement = document.getElementById('question-counter');
     const soloScoreElement = document.getElementById('solo-score');
-
+    
     // GENEL DEĞİŞKENLER VE API AYARLARI
-    const API_BASE_URL = "https://fromizmir.com/wp-json/lolonolo-quiz/v15";
     let allQuizzes = [];
     let currentQuizData = {};
     let currentQuestionIndex = 0;
     let soloScore = 0;
 
+    // ANA FONKSİYONLAR
     async function fetchAndDisplayQuizzes() {
         try {
-            const response = await fetch(`${API_BASE_URL}/quizzes`);
-            if (!response.ok) throw new Error(`Could not fetch quiz list. Server Status: ${response.status}`);
+            const response = await fetch(`/api/getQuizzes`);
+            if (!response.ok) {
+                // GÜNCELLEME: Hata cevabının JSON olup olmadığını kontrol et
+                const errorText = await response.text();
+                throw new Error(errorText || 'Sınav listesi alınamadı.');
+            }
             allQuizzes = await response.json();
             renderQuizList(allQuizzes);
         } catch (error) {
-            if (quizListContainer) quizListContainer.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
-            console.error(error);
+            if (quizListContainer) quizListContainer.innerHTML = `<p style="color: red;">Hata: ${error.message}</p>`;
         }
     }
 
     function renderQuizList(quizzes) {
-        if (!quizListContainer || !Array.isArray(quizzes) || quizzes.length === 0) {
-            quizListContainer.innerHTML = '<p>No quizzes found or data format is incorrect.</p>';
+        if (!quizListContainer || !Array.isArray(quizzes)) {
+            quizListContainer.innerHTML = '<p>Hiç sınav bulunamadı veya veri formatı yanlış.</p>';
             return;
         }
         quizListContainer.innerHTML = '';
@@ -54,12 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function startQuiz(quizId) {
-        lobbyScreen.innerHTML = `<h1>Loading Quiz...</h1>`;
+        lobbyScreen.innerHTML = `<h1>Sınav Yükleniyor...</h1>`;
         try {
-            const response = await fetch(`${API_BASE_URL}/quiz/${quizId}`);
-            if (!response.ok) throw new Error('Could not fetch quiz data.');
+            const response = await fetch(`/api/getQuiz?id=${quizId}`);
+            if (!response.ok) {
+                // GÜNCELLEME: Hata cevabının JSON olup olmadığını kontrol et
+                const errorText = await response.text();
+                throw new Error(errorText || 'Sınav verileri alınamadı.');
+            }
             currentQuizData = await response.json();
-            if(!currentQuizData.sorular || currentQuizData.sorular.length === 0){ throw new Error('No questions found in this quiz.'); }
+            if (!currentQuizData.sorular || currentQuizData.sorular.length === 0) { throw new Error('Bu sınavda soru bulunamadı.'); }
             currentQuestionIndex = 0;
             soloScore = 0;
             if (soloScoreElement) soloScoreElement.textContent = '0';
@@ -67,11 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
             showScreen(competitionScreen);
             loadQuestion(0);
         } catch (error) {
-            lobbyScreen.innerHTML = `<h1 style="color: red;">Error: ${error.message}</h1>`;
-            console.error(error);
+            lobbyScreen.innerHTML = `<h1 style="color: red;">Hata: ${error.message}</h1>`;
         }
     }
-    
+
     function loadQuestion(questionIndex) {
         const question = currentQuizData.sorular[questionIndex];
         currentQuestionIndex = questionIndex;
@@ -87,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', () => handleAnswer(index));
             optionsContainer.appendChild(button);
         });
-        questionCounterElement.textContent = `Question ${questionIndex + 1} / ${currentQuizData.sorular.length}`;
+        questionCounterElement.textContent = `Soru ${questionIndex + 1} / ${currentQuizData.sorular.length}`;
     }
 
     function handleAnswer(selectedIndex) {
@@ -113,31 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(showFinalScore, 3000);
         }
     }
-    
+
     function showFinalScore() {
-        questionTextElement.textContent = 'Quiz Finished!';
-        optionsContainer.innerHTML = `<strong>Your Final Score: ${soloScore}</strong><br><br><button class="next-question-btn" style="display: block;" onclick="location.reload()">Choose Another Quiz</button>`;
+        questionTextElement.textContent = 'Test Bitti!';
+        optionsContainer.innerHTML = `<strong>Final Puanınız: ${soloScore}</strong><br><br><button class="next-question-btn" style="display: block;" onclick="location.reload()">Yeni Sınav Seç</button>`;
         explanationArea.style.display = 'none';
         nextQuestionBtn.style.display = 'none';
     }
 
-    function goToNextQuestion() {
-        loadQuestion(currentQuestionIndex + 1);
-    }
+    function goToNextQuestion() { loadQuestion(currentQuestionIndex + 1); }
+    function showScreen(screenToShow) { if (lobbyScreen) lobbyScreen.style.display = 'none'; if (competitionScreen) competitionScreen.style.display = 'none'; if (screenToShow) screenToShow.style.display = 'flex'; }
     
-    function showScreen(screenToShow) {
-        if(lobbyScreen) lobbyScreen.style.display = 'none';
-        if(competitionScreen) competitionScreen.style.display = 'none';
-        if (screenToShow) screenToShow.style.display = 'flex';
-    }
-
     if (searchInput) searchInput.addEventListener('keyup', filterQuizzes);
+    document.body.addEventListener('click', function (event) { if (event.target && event.target.id === 'next-q-btn') { goToNextQuestion(); } });
     
-    document.body.addEventListener('click', function(event) {
-        if (event.target && event.target.id === 'next-q-btn') {
-            goToNextQuestion();
-        }
-    });
-
     fetchAndDisplayQuizzes();
 });
