@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', () => handleAnswer(index));
             optionsContainer.appendChild(button);
         });
-        questionCounterElement.textContent = `Soru ${questionIndex + 1} / ${currentQuizData.sorular.length}`;
+        questionCounterElement.textContent = `Question ${questionIndex + 1} / ${currentQuizData.sorular.length}`;
     }
     function handleAnswer(selectedIndex) {
         const allButtons = optionsContainer.querySelectorAll('.option-btn');
