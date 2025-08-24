@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderQuizList(filteredQuizzes);
     }
     async function startQuiz(quizId) {
-        lobbyScreen.innerHTML = `<h1>Sınav Yükleniyor...</h1>`;
+        lobbyScreen.innerHTML = `<h1>Exam is Loading...</h1>`;
         try {
             const response = await fetch(`/api/getQuiz?id=${quizId}`);
             if (!response.ok) {
