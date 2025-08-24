@@ -3,101 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizzes | From İzmir</title> 
-    <link rel="icon" type="image/png" href="https://lolonolo.com/wp-content/uploads/2025/04/lolonolo-favicon.png">
-    <link rel="apple-touch-icon" href="https://lolonolo.com/wp-content/uploads/2025/04/lolonolo-favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Quizzes | From İzmir</title>
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* Sağ ve sol reklam kutuları */
-        .side-ad {
-            position: fixed;
-            top: 80px;
-            width: 160px; /* Dikey reklam genişliği */
-            height: auto;
-            z-index: 999;
-        }
-        .left-ad {
-            left: 10px;
-        }
-        .right-ad {
-            right: 10px;
-        }
-
-        /* Mobilde gizle */
-        @media (max-width: 1024px) {
-            .side-ad {
-                display: none;
-            }
-        }
-    </style>
-</head>
+    </head>
 <body>
 
-    <!-- Sol Reklam -->
-    <div class="side-ad left-ad">
-        <!-- Ezoic - quiz.fromizmir.com_left - sidebar_middle -->
-        <div id="ezoic-pub-ad-placeholder-648"></div>
-        <!-- End Ezoic - quiz.fromizmir.com_left - sidebar_middle -->
-        <script>
-            window.ezstandalone = window.ezstandalone || {};
-            ezstandalone.cmd = ezstandalone.cmd || [];
-            ezstandalone.cmd.push(function() {
-                ezstandalone.showAds(648);
-            });
-        </script>
-    </div>
+    <div class="main-layout">
 
-    <!-- Sağ Reklam -->
-    <div class="side-ad right-ad">
-        <!-- Ezoic - quiz.fromizmir.right - sidebar_middle -->
-        <div id="ezoic-pub-ad-placeholder-647"></div>
-        <!-- End Ezoic - quiz.fromizmir.right - sidebar_middle -->
-        <script>
-            window.ezstandalone = window.ezstandalone || {};
-            ezstandalone.cmd = ezstandalone.cmd || [];
-            ezstandalone.cmd.push(function() {
-                ezstandalone.showAds(647);
-            });
-        </script>
-    </div>
+        <div class="ad-sidebar ad-sidebar-left">
+            <div id="ezoic-pub-ad-placeholder-648"></div>
+            <script>
+                if (window.ezstandalone) {
+                    ezstandalone.cmd.push(function() { ezstandalone.showAds(648); });
+                }
+            </script>
+        </div>
 
-    <div id="lobby-screen" class="screen">
-        <div class="lobby-container">
-            <h1>Choose Your Quiz and Start!</h1>
-            <p>Select a quiz from the list below or use the search.</p>
-            <div class="quiz-selection-area">
-                <input type="text" id="quiz-search-input" placeholder="Search quizzes...">
-                <div id="quiz-list-container">
-                    <p>Loading quizzes...</p>
+        <div class="app-container">
+            <div id="lobby-screen" class="screen">
+                <div class="lobby-container">
+                    <h1>Choose Your Quiz and Start!</h1>
+                    <p>Select a quiz from the list below or use the search.</p>
+                    <div class="quiz-selection-area">
+                        <input type="text" id="quiz-search-input" placeholder="Search quizzes...">
+                        <div id="quiz-list-container">
+                            <p>Loading quizzes...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="competition-container" id="competition-screen" style="display: none;">
+                <div class="quiz-panel">
+                    <div class="quiz-header">
+                        <h1 class="quiz-title" id="quiz-title">...</h1>
+                        <div class="solo-score-display" id="solo-score-container">
+                            Score: <span id="solo-score">0</span>
+                        </div>
+                    </div>
+                    <div class="question-area">
+                        <h3 id="question-text">...</h3>
+                        <div class="options-grid" id="options-container"></div>
+                        <div class="explanation-area" id="explanation-area"></div>
+                        <button class="next-question-btn" id="next-q-btn">Next Question</button>
+                    </div>
+                    <div class="quiz-footer" id="question-counter">Question ... / ...</div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="competition-container" id="competition-screen" style="display: none;">
-        <div class="quiz-panel">
-            <div class="quiz-header">
-                <h1 class="quiz-title" id="quiz-title">...</h1>
-                <div class="solo-score-display" id="solo-score-container">
-                    Score: <span id="solo-score">0</span>
-                </div>
-            </div>
-            <div class="question-area">
-                <h3 id="question-text">...</h3>
-                <div class="options-grid" id="options-container"></div>
-                <div class="explanation-area" id="explanation-area"></div>
-                <button class="next-question-btn" id="next-q-btn">Next Question</button>
-            </div>
-            <div class="quiz-footer" id="question-counter">Question ... / ...</div>
+        <div class="ad-sidebar ad-sidebar-right">
+            <div id="ezoic-pub-ad-placeholder-647"></div>
+            <script>
+                if (window.ezstandalone) {
+                    ezstandalone.cmd.push(function() { ezstandalone.showAds(647); });
+                }
+            </script>
         </div>
-    </div>
 
-    <div id="mobile-ad-container"></div>
+    </div> <div id="mobile-ad-container">
+        </div>
 
     <script src="script.js"></script>
-</body>
+    </body>
 </html>
