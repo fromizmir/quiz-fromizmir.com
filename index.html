@@ -3,14 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizzes | From İzmir</title> <link rel="icon" type="image/png" href="https://lolonolo.com/wp-content/uploads/2025/04/lolonolo-favicon.png">
+    <title>Quizzes | From İzmir</title> 
+    <link rel="icon" type="image/png" href="https://lolonolo.com/wp-content/uploads/2025/04/lolonolo-favicon.png">
     <link rel="apple-touch-icon" href="https://lolonolo.com/wp-content/uploads/2025/04/lolonolo-favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Sağ ve sol reklam kutuları */
+        .side-ad {
+            position: fixed;
+            top: 80px;
+            width: 160px; /* Dikey reklam genişliği */
+            height: auto;
+            z-index: 999;
+        }
+        .left-ad {
+            left: 10px;
+        }
+        .right-ad {
+            right: 10px;
+        }
+
+        /* Mobilde gizle */
+        @media (max-width: 1024px) {
+            .side-ad {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Sol Reklam -->
+    <div class="side-ad left-ad">
+        <!-- Ezoic - quiz.fromizmir.com_left - sidebar_middle -->
+        <div id="ezoic-pub-ad-placeholder-648"></div>
+        <!-- End Ezoic - quiz.fromizmir.com_left - sidebar_middle -->
+        <script>
+            window.ezstandalone = window.ezstandalone || {};
+            ezstandalone.cmd = ezstandalone.cmd || [];
+            ezstandalone.cmd.push(function() {
+                ezstandalone.showAds(648);
+            });
+        </script>
+    </div>
+
+    <!-- Sağ Reklam -->
+    <div class="side-ad right-ad">
+        <!-- Ezoic - quiz.fromizmir.right - sidebar_middle -->
+        <div id="ezoic-pub-ad-placeholder-647"></div>
+        <!-- End Ezoic - quiz.fromizmir.right - sidebar_middle -->
+        <script>
+            window.ezstandalone = window.ezstandalone || {};
+            ezstandalone.cmd = ezstandalone.cmd || [];
+            ezstandalone.cmd.push(function() {
+                ezstandalone.showAds(647);
+            });
+        </script>
+    </div>
+
     <div id="lobby-screen" class="screen">
         <div class="lobby-container">
             <h1>Choose Your Quiz and Start!</h1>
@@ -42,8 +96,7 @@
         </div>
     </div>
 
-    <div id="mobile-ad-container">
-        </div>
+    <div id="mobile-ad-container"></div>
 
     <script src="script.js"></script>
 </body>
