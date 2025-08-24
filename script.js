@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function startQuiz(quizId) {
-        lobbyScreen.innerHTML = `<h1>Sınav Yükleniyor...</h1>`;
+        lobbyScreen.innerHTML = `<h1>Loading Exam...</h1>`;
         try {
             // İSTEK ARTIK GÜVENLİ VERcel API'MIZA GİDİYOR (ANAHTAR YOK)
             const response = await fetch(`/api/getQuiz?id=${quizId}`);
