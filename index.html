@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sınav Yarışması | Lolonolo</title>
-    
+    <title>Quiz App | From İzmir</title>
+
     <link rel="icon" type="image/png" href="https://lolonolo.com/wp-content/uploads/2025/04/lolonolo-favicon.png">
     <link rel="apple-touch-icon" href="https://lolonolo.com/wp-content/uploads/2025/04/lolonolo-favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
       gtag('js', new Date());
       gtag('config', 'G-QKYBK4YQ1T');
     </script>
-        
+    
     <script>
         window.ezstandalone = window.ezstandalone || {};
         ezstandalone.cmd = ezstandalone.cmd || [];
@@ -28,7 +28,6 @@
     <script src="https://the.gatekeeperconsent.com/cmp.min.js" async></script>
     <script src="https://the.gatekeeperconsent.com/ccpa/v2/standalone.js" async></script>
     <script src="//www.ezojs.com/ezoic/sa.min.js" async></script>
-
     <script async src="https://fundingchoicesmessages.google.com/i/pub-6517205438926212?ers=1"></script>
     <script>
         function signalGooglefcPresent() {
@@ -45,41 +44,41 @@
         }
         signalGooglefcPresent();
     </script>
-    </head>
+</head>
 <body>
     <div id="lobby-screen" class="screen">
         <div class="lobby-container">
-            <h1>Sınavını Seç ve Başla!</h1>
-            <p>Aşağıdaki sınavlardan birini seçin veya arama yapın.</p>
+            <h1>Choose Your Quiz and Start!</h1>
+            <p>Select a quiz from the list below or use the search.</p>
             <div class="quiz-selection-area">
-                <input type="text" id="quiz-search-input" placeholder="Sınav ara...">
+                <input type="text" id="quiz-search-input" placeholder="Search for a quiz...">
                 <div id="quiz-list-container">
-                    <p>Sınavlar yükleniyor...</p>
+                    <p>Loading quizzes...</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="competition-container" id="competition-screen" style="display= none;">
+    <div class="competition-container" id="competition-screen" style="display: none;">
         <div class="quiz-panel">
             <div class="quiz-header">
-                <h1 class="quiz-title" id="quiz-title">Sınav Adı Yükleniyor...</h1>
+                <h1 class="quiz-title" id="quiz-title">Loading Quiz Name...</h1>
                 <div class="solo-score-display" id="solo-score-container">
-                    Puan: <span id="solo-score">0</span>
+                    Score: <span id="solo-score">0</span>
                 </div>
             </div>
             <div class="question-area">
-                <h3 id="question-text">Soru metni buraya gelecek...</h3>
+                <h3 id="question-text">Question text will appear here...</h3>
                 <div class="options-grid" id="options-container"></div>
                 <div class="explanation-area" id="explanation-area"></div>
-                <button class="next-question-btn" id="next-q-btn">Sonraki Soru</button>
+                <button class="next-question-btn" id="next-q-btn">Next Question</button>
             </div>
-            <div class="quiz-footer" id="question-counter">Soru ... / ...</div>
+            <div class="quiz-footer" id="question-counter">Question ... / ...</div>
         </div>
     </div>
     
     <div id="mobile-ad-container">
-         </div>
+        </div>
 
     <script src="script.js"></script>
 
