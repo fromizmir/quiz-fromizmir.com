@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function showFinalScore() {
         questionTextElement.textContent = 'Test Bitti!';
-        optionsContainer.innerHTML = `<strong>Final Puanınız: ${soloScore}</strong><br><br><button class="next-question-btn" style="display: block;" onclick="location.reload()">Yeni Sınav Seç</button>`;
+        optionsContainer.innerHTML = `<strong>Final Puanınız: ${soloScore}</strong><br><br><button class="next-question-btn" style="display: block;" onclick="location.reload()">Choose New Exam</button>`;
         explanationArea.style.display = 'none';
         nextQuestionBtn.style.display = 'none';
     }
