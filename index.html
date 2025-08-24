@@ -20,6 +20,7 @@
       gtag('js', new Date());
       gtag('config', 'G-QKYBK4YQ1T');
     </script>
+        
     <script>
         window.ezstandalone = window.ezstandalone || {};
         ezstandalone.cmd = ezstandalone.cmd || [];
@@ -27,6 +28,7 @@
     <script src="https://the.gatekeeperconsent.com/cmp.min.js" async></script>
     <script src="https://the.gatekeeperconsent.com/ccpa/v2/standalone.js" async></script>
     <script src="//www.ezojs.com/ezoic/sa.min.js" async></script>
+
     <script async src="https://fundingchoicesmessages.google.com/i/pub-6517205438926212?ers=1"></script>
     <script>
         function signalGooglefcPresent() {
@@ -43,16 +45,18 @@
         }
         signalGooglefcPresent();
     </script>
+    
     <script data-ezscrex="false" data-cfasync="false">(window.humixPlayers = window.humixPlayers || []).push({target: document.currentScript});</script>
     <script async data-ezscrex="false" data-cfasync="false" src="https://www.humix.com/video.js"></script>
-</head>
+    
+    </head>
 <body>
 
     <div class="main-layout">
 
         <div class="ad-sidebar ad-sidebar-left">
             <div id="ezoic-pub-ad-placeholder-648"></div>
-            </div>
+        </div>
 
         <div class="app-container">
             <div id="lobby-screen" class="screen">
@@ -89,7 +93,7 @@
 
         <div class="ad-sidebar ad-sidebar-right">
             <div id="ezoic-pub-ad-placeholder-647"></div>
-            </div>
+        </div>
 
     </div> <div id="mobile-ad-container">
         </div>
@@ -98,15 +102,17 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Ezoic'i başlat
             if (typeof ezstandalone !== 'undefined') {
                 ezstandalone.cmd.push(function() {
-                    // Ana Ezoic'i başlat
                     ezstandalone.enable();
                     ezstandalone.display();
-
-                    // Dikey reklam alanlarını göster
-                    ezstandalone.showAds(648);
-                    ezstandalone.showAds(647);
+                });
+            }
+            // Dikey reklam alanlarını göster
+            if (typeof ezstandalone !== 'undefined') {
+                 ezstandalone.cmd.push(function() {
+                    ezstandalone.showAds(648, 647);
                 });
             }
         });
