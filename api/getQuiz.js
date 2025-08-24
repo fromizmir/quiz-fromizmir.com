@@ -3,7 +3,7 @@ export const config = {
 };
 
 export default async function handler(request) {
-  // URL'den sınav ID'sini al (örn: /api/getQuiz?id=123)
+  // URL'den sınav ID'sini al
   const { searchParams } = new URL(request.url);
   const quizId = searchParams.get('id');
 
@@ -25,8 +25,19 @@ export default async function handler(request) {
       throw new Error(`WordPress API hatası: ${response.statusText}`);
     }
 
-    const data = await response.json();
+    let data = await response.json();
 
+    // --- YENİ EKLENEN KISIM: SORULARI KARIŞTIRMA ---
+    if (data && data.sorular && Array.isArray(data.sorular)) {
+      // Fisher-Yates (aka Knuth) Shuffle algoritması
+      for (let i = data.sorular.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [data.sorular[i], data.sorular[j]] = [data.sorular[j], data.sorular[i]];
+      }
+    }
+    // --- YENİ KISIM SONU ---
+
+    // Artık karıştırılmış veriyi tarayıcıya geri gönder
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: {
