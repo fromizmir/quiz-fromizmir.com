@@ -54,7 +54,6 @@ body {
 
 .app-container {
     flex-grow: 1;
-    max-width: 840px;
     width: 100%;
     min-height: 100vh;
     margin: 0;
