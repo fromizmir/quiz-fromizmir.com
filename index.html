@@ -47,12 +47,10 @@
 <body>
     <div class="main-layout">
         <div class="side-column left-column">
-                <!-- Ezoic - quiz.fromizmir.com_left - sidebar_middle -->
-<div id="ezoic-pub-ad-placeholder-648"></div>
-
+            <!-- Ezoic - quiz.fromizmir.com_left - sidebar_middle -->
+            <div id="ezoic-pub-ad-placeholder-648"></div>
+            <!-- End Ezoic -->
         </div>
-
-</script></div>
         <div class="app-container">
             <div id="lobby-screen" class="screen">
                 <div class="lobby-container">
@@ -86,14 +84,21 @@
             <div id="mobile-ad-container"></div>
         </div>
         <div class="side-column right-column">
-                <!-- Ezoic - quiz.fromizmir.com_right - sidebar_middle -->
-<div id="ezoic-pub-ad-placeholder-647"></div>
-
-        </div>
-<!-- End Ezoic - quiz.fromizmir.com_left - sidebar_middle -->
+            <!-- Ezoic - quiz.fromizmir.com_right - sidebar_middle -->
+            <div id="ezoic-pub-ad-placeholder-647"></div>
+            <!-- End Ezoic -->
         </div>
     </div>
     <script src="script.js"></script>
+    <!-- Reklam script kodları div'lerin dışında, sayfanın sonunda -->
+    <script>
+        window.ezstandalone = window.ezstandalone || {};
+        ezstandalone.cmd = ezstandalone.cmd || [];
+        ezstandalone.cmd.push(function() {
+            ezstandalone.showAds(648);
+            ezstandalone.showAds(647);
+        });
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (typeof ezstandalone !== 'undefined') {
