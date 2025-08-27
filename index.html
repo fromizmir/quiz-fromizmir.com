@@ -91,23 +91,19 @@
     </div>
     <script src="script.js"></script>
     <!-- Reklam script kodları div'lerin dışında, sayfanın sonunda -->
-    <script>
-        window.ezstandalone = window.ezstandalone || {};
-        ezstandalone.cmd = ezstandalone.cmd || [];
-        ezstandalone.cmd.push(function() {
-            ezstandalone.showAds(648);
-            ezstandalone.showAds(647);
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (typeof ezstandalone !== 'undefined') {
-                ezstandalone.cmd.push(function() {
-                    ezstandalone.enable();
-                    ezstandalone.display();
-                });
-            }
-        });
-    </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof ezstandalone !== 'undefined') {
+            ezstandalone.cmd.push(function() {
+                ezstandalone.showAds(648);
+                ezstandalone.showAds(647);
+            });
+            ezstandalone.cmd.push(function() {
+                ezstandalone.enable();
+                ezstandalone.display();
+            });
+        }
+    });
+</script>
 </body>
 </html>
